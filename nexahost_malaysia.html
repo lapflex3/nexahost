@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexaHost — Penyelesaian Hosting & Web Malaysia</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #050d1a;
+    --navy2: #091425;
+    --navy3: #0e1f38;
+    --navy4: #132847;
+    --electric: #00d4ff;
+    --electric2: #0099cc;
+    --gold: #f5a623;
+    --gold2: #e89310;
+    --green: #00e87a;
+    --purple: #a855f7;
+    --card-bg: rgba(255,255,255,0.04);
+    --card-border: rgba(255,255,255,0.08);
+    --text-primary: #f0f4ff;
+    --text-secondary: #8ba4c9;
+    --text-muted: #4a6580;
+    --gradient-hero: linear-gradient(135deg, #050d1a 0%, #0a1628 50%, #0d1f3c 100%);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-thumb { background: var(--electric2); border-radius: 3px; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 999;
+    background: rgba(5,13,26,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,212,255,0.12);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px;
+  }
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px; font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--text-primary);
+  }
+  .logo span { color: var(--electric); }
+  .logo sub {
+    font-size: 9px; font-weight: 600;
+    color: var(--gold); vertical-align: super;
+    letter-spacing: 2px; margin-left: 2px;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-secondary);
+    font-size: 14px; font-weight: 500;
+    transition: color 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .nav-links a:hover { color: var(--electric); }
+  .nav-cta {
+    background: linear-gradient(90deg, var(--electric), var(--electric2));
+    color: var(--navy); padding: 9px 22px;
+    border-radius: 8px; font-size: 14px; font-weight: 600;
+    text-decoration: none; letter-spacing: 0.3px;
+    transition: opacity 0.2s; white-space: nowrap;
+  }
+  .nav-cta:hover { opacity: 0.88; }
+
+  /* ── SECTIONS ── */
+  section { padding: 90px 5%; }
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 3px;
+    color: var(--electric); text-transform: uppercase; margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800; line-height: 1.15;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+  }
+  .section-title span { color: var(--electric); }
+  .section-subtitle {
+    font-size: 16px; color: var(--text-secondary);
+    max-width: 560px; line-height: 1.7; margin-bottom: 56px;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: var(--gradient-hero);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-start;
+    padding-top: 120px;
+    position: relative; overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 50%, rgba(0,212,255,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 10% 80%, rgba(168,85,247,0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,212,255,0.1);
+    border: 1px solid rgba(0,212,255,0.25);
+    border-radius: 40px; padding: 6px 16px;
+    font-size: 13px; color: var(--electric);
+    font-weight: 500; margin-bottom: 28px;
+    letter-spacing: 0.3px;
+  }
+  .hero-badge::before {
+    content: ''; width: 7px; height: 7px;
+    background: var(--electric); border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 800; line-height: 1.08;
+    letter-spacing: -2px; margin-bottom: 24px;
+    max-width: 800px;
+  }
+  .hero-title .accent { color: var(--electric); }
+  .hero-title .gold { color: var(--gold); }
+  .hero-sub {
+    font-size: clamp(15px, 2vw, 18px);
+    color: var(--text-secondary); max-width: 540px;
+    line-height: 1.75; margin-bottom: 44px;
+  }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: linear-gradient(90deg, var(--electric), #009fd4);
+    color: var(--navy); padding: 14px 32px;
+    border-radius: 10px; font-size: 15px; font-weight: 700;
+    text-decoration: none; letter-spacing: 0.3px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,212,255,0.25); }
+  .btn-outline {
+    background: transparent;
+    border: 1.5px solid rgba(0,212,255,0.4);
+    color: var(--electric); padding: 14px 32px;
+    border-radius: 10px; font-size: 15px; font-weight: 600;
+    text-decoration: none; letter-spacing: 0.3px;
+    transition: background 0.2s, border-color 0.2s;
+    cursor: pointer;
+  }
+  .btn-outline:hover { background: rgba(0,212,255,0.08); border-color: var(--electric); }
+  .hero-stats {
+    display: flex; gap: 48px; margin-top: 64px;
+    padding-top: 48px; border-top: 1px solid rgba(255,255,255,0.07);
+  }
+  .stat-item { display: flex; flex-direction: column; gap: 4px; }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px; font-weight: 800; color: var(--electric);
+  }
+  .stat-label { font-size: 13px; color: var(--text-muted); }
+
+  /* ── GRID CARDS ── */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 32px 28px;
+    position: relative;
+    transition: transform 0.25s, border-color 0.25s;
+  }
+  .card:hover { transform: translateY(-4px); border-color: rgba(0,212,255,0.25); }
+  .card.popular {
+    border-color: rgba(0,212,255,0.4);
+    background: linear-gradient(135deg, rgba(0,212,255,0.07), rgba(0,153,204,0.04));
+  }
+  .popular-badge {
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    background: linear-gradient(90deg, var(--electric), var(--electric2));
+    color: var(--navy); font-size: 11px; font-weight: 700;
+    padding: 4px 16px; border-radius: 20px; letter-spacing: 1.5px;
+    text-transform: uppercase; white-space: nowrap;
+  }
+  .card-tier {
+    font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--electric); margin-bottom: 10px;
+  }
+  .card-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px; font-weight: 800;
+    color: var(--text-primary); margin-bottom: 8px;
+  }
+  .card-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.55; }
+  .price-row { display: flex; align-items: baseline; gap: 4px; margin-bottom: 6px; }
+  .currency { font-size: 16px; font-weight: 600; color: var(--text-secondary); }
+  .price { font-family: 'Syne', sans-serif; font-size: 40px; font-weight: 800; color: var(--text-primary); }
+  .price-period { font-size: 13px; color: var(--text-muted); }
+  .price-annual {
+    font-size: 12px; color: var(--green);
+    margin-bottom: 28px; font-weight: 500;
+  }
+  .feature-list { list-style: none; display: flex; flex-direction: column; gap: 11px; margin-bottom: 28px; }
+  .feature-list li {
+    font-size: 14px; color: var(--text-secondary);
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .feature-list li::before {
+    content: '✓'; color: var(--green);
+    font-weight: 700; font-size: 13px; margin-top: 1px; flex-shrink: 0;
+  }
+  .feature-list li.no::before { content: '✗'; color: var(--text-muted); }
+  .card-btn {
+    width: 100%; padding: 12px;
+    border-radius: 9px; font-size: 14px; font-weight: 600;
+    cursor: pointer; text-align: center; text-decoration: none;
+    display: block; transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .card-btn-primary {
+    background: linear-gradient(90deg, var(--electric), #009fd4);
+    color: var(--navy); border: none;
+  }
+  .card-btn-primary:hover { opacity: 0.88; }
+  .card-btn-outline {
+    background: transparent;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    color: var(--text-primary);
+  }
+  .card-btn-outline:hover { border-color: var(--electric); color: var(--electric); }
+
+  /* ── TOGGLE BILLING ── */
+  .billing-toggle {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 48px;
+    justify-content: center;
+  }
+  .toggle-label { font-size: 14px; color: var(--text-secondary); font-weight: 500; }
+  .toggle-switch {
+    width: 52px; height: 28px;
+    background: rgba(0,212,255,0.25);
+    border-radius: 14px; position: relative;
+    cursor: pointer; border: 1px solid rgba(0,212,255,0.4);
+    transition: background 0.25s;
+  }
+  .toggle-switch::after {
+    content: ''; position: absolute;
+    width: 20px; height: 20px;
+    background: var(--electric); border-radius: 50%;
+    top: 3px; left: 3px; transition: left 0.25s;
+  }
+  .toggle-switch.active { background: rgba(0,212,255,0.4); }
+  .toggle-switch.active::after { left: 27px; }
+  .save-badge {
+    background: rgba(0,232,122,0.15); color: var(--green);
+    font-size: 11px; font-weight: 700;
+    padding: 3px 10px; border-radius: 12px; letter-spacing: 1px;
+  }
+
+  /* ── DOMAIN SECTION ── */
+  #domain { background: linear-gradient(180deg, var(--navy) 0%, var(--navy3) 100%); }
+  .domain-search {
+    display: flex; gap: 0; margin-bottom: 52px;
+    max-width: 620px;
+  }
+  .domain-input {
+    flex: 1; padding: 15px 20px;
+    background: rgba(255,255,255,0.05);
+    border: 1.5px solid rgba(255,255,255,0.1);
+    border-right: none; border-radius: 10px 0 0 10px;
+    color: var(--text-primary); font-size: 15px;
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+  }
+  .domain-input::placeholder { color: var(--text-muted); }
+  .domain-input:focus { border-color: rgba(0,212,255,0.4); }
+  .domain-search-btn {
+    background: linear-gradient(90deg, var(--electric), #009fd4);
+    color: var(--navy); padding: 15px 28px;
+    border: none; border-radius: 0 10px 10px 0;
+    font-size: 15px; font-weight: 700;
+    cursor: pointer; transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+  .domain-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+  }
+  .domain-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px; padding: 24px 20px;
+    text-align: center; transition: all 0.25s;
+    cursor: pointer;
+  }
+  .domain-card:hover { border-color: rgba(0,212,255,0.35); transform: translateY(-3px); }
+  .domain-ext {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px; font-weight: 800; color: var(--electric); margin-bottom: 6px;
+  }
+  .domain-price-old {
+    font-size: 12px; color: var(--text-muted);
+    text-decoration: line-through; margin-bottom: 2px;
+  }
+  .domain-price-new {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px; font-weight: 700; color: var(--text-primary);
+  }
+  .domain-unit { font-size: 11px; color: var(--text-muted); }
+  .domain-popular {
+    background: rgba(245,166,35,0.12);
+    color: var(--gold); font-size: 10px; font-weight: 700;
+    padding: 3px 10px; border-radius: 12px; letter-spacing: 1px;
+    display: inline-block; margin-top: 8px;
+  }
+  .domain-renew {
+    font-size: 11px; color: var(--text-muted); margin-top: 6px;
+  }
+
+  /* ── WEB DESIGN SECTION ── */
+  #webdesign { background: var(--navy2); }
+  .design-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+  }
+  .design-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px; padding: 36px 30px;
+    transition: all 0.3s; position: relative; overflow: hidden;
+  }
+  .design-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--electric), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .design-card:hover::before { opacity: 1; }
+  .design-card:hover { transform: translateY(-5px); border-color: rgba(0,212,255,0.2); }
+  .design-icon {
+    width: 48px; height: 48px;
+    background: rgba(0,212,255,0.1); border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-bottom: 18px;
+  }
+  .design-type {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--electric); margin-bottom: 8px;
+  }
+  .design-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px; font-weight: 800; margin-bottom: 8px;
+  }
+  .design-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 22px; line-height: 1.6; }
+  .design-price-row { display: flex; align-items: baseline; gap: 6px; margin-bottom: 22px; }
+  .design-from { font-size: 12px; color: var(--text-muted); }
+  .design-price { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; }
+  .design-once { font-size: 12px; color: var(--text-muted); }
+  .feature-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+  .feature-tag {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px; padding: 5px 12px;
+    font-size: 12px; color: var(--text-secondary);
+  }
+  .delivery-badge {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--gold); margin-top: 6px;
+  }
+
+  /* ── TABLE ── */
+  .table-wrapper {
+    overflow-x: auto;
+    border-radius: 16px;
+    border: 1px solid var(--card-border);
+    margin-bottom: 40px;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  thead tr { background: rgba(0,212,255,0.07); }
+  th {
+    padding: 16px 20px; text-align: left;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--electric); white-space: nowrap;
+    border-bottom: 1px solid var(--card-border);
+  }
+  td {
+    padding: 15px 20px;
+    font-size: 14px; color: var(--text-secondary);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(0,212,255,0.03); }
+  td:first-child { color: var(--text-primary); font-weight: 500; }
+  .tag-popular {
+    background: rgba(0,232,122,0.12); color: var(--green);
+    font-size: 10px; font-weight: 700; padding: 3px 9px;
+    border-radius: 10px; letter-spacing: 1px;
+    vertical-align: middle; margin-left: 6px;
+  }
+  .tag-promo {
+    background: rgba(245,166,35,0.12); color: var(--gold);
+    font-size: 10px; font-weight: 700; padding: 3px 9px;
+    border-radius: 10px; letter-spacing: 1px;
+    vertical-align: middle; margin-left: 6px;
+  }
+
+  /* ── SERVICE CHARGES ── */
+  #servicecharge { background: var(--navy3); }
+  .charge-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  .charge-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px; padding: 26px 22px;
+    transition: all 0.25s;
+  }
+  .charge-card:hover { border-color: rgba(245,166,35,0.3); transform: translateY(-3px); }
+  .charge-icon {
+    font-size: 28px; margin-bottom: 14px; display: block;
+  }
+  .charge-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px; font-weight: 700; margin-bottom: 6px;
+  }
+  .charge-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.55; }
+  .charge-price {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px; font-weight: 800; color: var(--gold);
+  }
+  .charge-period { font-size: 12px; color: var(--text-muted); margin-left: 4px; }
+
+  /* ── TESTIMONIALS ── */
+  #testimoni { background: var(--navy); }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  .testi-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 30px 26px;
+    position: relative; transition: all 0.25s;
+  }
+  .testi-card:hover { border-color: rgba(0,212,255,0.2); }
+  .testi-quote {
+    font-size: 42px; color: var(--electric); opacity: 0.25;
+    font-family: 'Syne', sans-serif; line-height: 1;
+    margin-bottom: 14px;
+  }
+  .testi-text {
+    font-size: 14px; color: var(--text-secondary);
+    line-height: 1.75; margin-bottom: 22px; font-style: italic;
+  }
+  .testi-stars { color: var(--gold); font-size: 14px; margin-bottom: 16px; letter-spacing: 2px; }
+  .testi-profile { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 700; flex-shrink: 0;
+    font-family: 'Syne', sans-serif;
+  }
+  .testi-name { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+  .testi-role { font-size: 12px; color: var(--text-muted); }
+
+  /* ── MONETIZE SECTION ── */
+  #monetize {
+    background: linear-gradient(135deg, #0a1628 0%, #0e1f38 100%);
+    border-top: 1px solid rgba(0,212,255,0.1);
+  }
+  .mono-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .mono-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 28px 24px;
+    transition: all 0.25s;
+  }
+  .mono-card:hover { border-color: rgba(168,85,247,0.3); }
+  .mono-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 48px; font-weight: 800;
+    color: rgba(168,85,247,0.2); line-height: 1; margin-bottom: 14px;
+  }
+  .mono-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px; font-weight: 700; margin-bottom: 10px;
+  }
+  .mono-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy2);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 72px 5% 40px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 48px; margin-bottom: 56px;
+  }
+  .footer-brand .logo { font-size: 26px; margin-bottom: 16px; display: block; }
+  .footer-brand p { font-size: 14px; color: var(--text-muted); line-height: 1.7; max-width: 280px; }
+  .footer-contact {
+    margin-top: 24px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .footer-contact a {
+    font-size: 14px; color: var(--text-secondary); text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+    transition: color 0.2s;
+  }
+  .footer-contact a:hover { color: var(--electric); }
+  .footer-col h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a {
+    font-size: 14px; color: var(--text-secondary);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: var(--electric); }
+  .social-row { display: flex; gap: 12px; margin-top: 20px; }
+  .social-btn {
+    width: 38px; height: 38px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; display: flex;
+    align-items: center; justify-content: center;
+    font-size: 16px; text-decoration: none;
+    transition: all 0.2s; cursor: pointer;
+  }
+  .social-btn:hover { background: rgba(0,212,255,0.1); border-color: rgba(0,212,255,0.3); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 28px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-bottom p { font-size: 13px; color: var(--text-muted); }
+  .footer-cert {
+    display: flex; gap: 12px; align-items: center;
+  }
+  .cert-badge {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px; padding: 5px 12px;
+    font-size: 11px; color: var(--text-muted); font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── TRUST BAR ── */
+  .trust-bar {
+    background: rgba(0,212,255,0.05);
+    border-top: 1px solid rgba(0,212,255,0.1);
+    border-bottom: 1px solid rgba(0,212,255,0.1);
+    padding: 18px 5%;
+    display: flex; gap: 40px; align-items: center;
+    overflow-x: auto; flex-wrap: wrap;
+    justify-content: center;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 9px;
+    font-size: 13px; color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .trust-icon { font-size: 16px; }
+
+  /* ── ALERT BANNER ── */
+  .promo-banner {
+    background: linear-gradient(90deg, rgba(245,166,35,0.15), rgba(168,85,247,0.1));
+    border-bottom: 1px solid rgba(245,166,35,0.2);
+    padding: 11px 5%; text-align: center;
+    font-size: 13px; color: var(--gold); font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+  .promo-banner strong { font-weight: 700; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 0 4%; }
+    .nav-links { display: none; }
+    #hero { padding: 110px 4% 60px; }
+    section { padding: 70px 4%; }
+    .hero-stats { gap: 28px; flex-wrap: wrap; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .domain-search { flex-direction: column; }
+    .domain-input { border-right: 1.5px solid rgba(255,255,255,0.1); border-radius: 10px 10px 0 0; }
+    .domain-search-btn { border-radius: 0 0 10px 10px; }
+  }
+
+  /* ── SECTION DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,212,255,0.15), transparent);
+    margin: 0 5%;
+  }
+
+  /* ── COMPARE TABLE ── */
+  .compare-head-cell {
+    text-align: center;
+    padding: 20px 16px 14px !important;
+  }
+  .compare-check { color: var(--green); font-size: 16px; text-align: center; display: block; }
+  .compare-cross { color: var(--text-muted); font-size: 16px; text-align: center; display: block; }
+  .compare-val { text-align: center; color: var(--text-secondary); font-size: 14px; display: block; }
+
+  /* ── CTA BAND ── */
+  .cta-band {
+    background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(168,85,247,0.08));
+    border: 1px solid rgba(0,212,255,0.15);
+    border-radius: 20px;
+    padding: 52px 48px;
+    text-align: center;
+    margin-top: 60px;
+  }
+  .cta-band h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(24px,4vw,38px); font-weight: 800;
+    margin-bottom: 14px;
+  }
+  .cta-band p { font-size: 16px; color: var(--text-secondary); margin-bottom: 32px; }
+
+  /* scrolltop btn */
+  #scrolltop {
+    position: fixed; bottom: 28px; right: 28px;
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--electric), var(--electric2));
+    color: var(--navy); border: none;
+    border-radius: 12px; cursor: pointer;
+    font-size: 18px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 998; box-shadow: 0 6px 20px rgba(0,212,255,0.3);
+    transition: transform 0.2s;
+  }
+  #scrolltop:hover { transform: translateY(-3px); }
+</style>
+</head>
+<body>
+
+<!-- PROMO BANNER -->
+<div class="promo-banner">
+  🎉 <strong>PROMO KEMERDEKAAN:</strong> Dapatkan domain .MY PERCUMA dengan mana-mana pakej hosting tahunan! Tawaran sehingga 31 Ogos 2025. &nbsp;
+  <a href="#hosting" style="color:var(--gold);font-weight:700;text-decoration:underline;">Tuntut Sekarang →</a>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">Nexa<span>Host</span><sub>MY</sub></div>
+  <ul class="nav-links">
+    <li><a href="#hero">Utama</a></li>
+    <li><a href="#hosting">Hosting</a></li>
+    <li><a href="#domain">Domain</a></li>
+    <li><a href="#webdesign">Web Design</a></li>
+    <li><a href="#servicecharge">Servis</a></li>
+    <li><a href="#testimoni">Testimoni</a></li>
+    <li><a href="#hubungi">Hubungi Kami</a></li>
+  </ul>
+  <a href="#hosting" class="nav-cta">Mulakan Sekarang</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-badge">Penyelesaian Terpercaya Malaysia Sejak 2015</div>
+  <h1 class="hero-title">
+    Bina Kehadiran<br>
+    Digital Anda yang<br>
+    <span class="accent">Paling Kuat</span>
+  </h1>
+  <p class="hero-sub">
+    Hosting berprestasi tinggi, domain premium, & reka bentuk web profesional — semua dalam satu platform. Dipercayai lebih 12,000+ perniagaan Malaysia.
+  </p>
+  <div class="hero-btns">
+    <a href="#hosting" class="btn-primary">Tempah Sekarang</a>
+    <a href="#hosting" class="btn-outline">Lihat Pakej</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <span class="stat-num">12,000+</span>
+      <span class="stat-label">Pelanggan Aktif</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">99.9%</span>
+      <span class="stat-label">Uptime Dijamin</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">24/7</span>
+      <span class="stat-label">Sokongan Teknikal</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">10 Thn</span>
+      <span class="stat-label">Pengalaman</span>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span class="trust-icon">🔒</span> SSL Termasuk Percuma</div>
+  <div class="trust-item"><span class="trust-icon">⚡</span> NVMe SSD Laju</div>
+  <div class="trust-item"><span class="trust-icon">🇲🇾</span> Pelayan Malaysia</div>
+  <div class="trust-item"><span class="trust-icon">🔄</span> Backup Harian Automatik</div>
+  <div class="trust-item"><span class="trust-icon">💳</span> Bayar Dengan FPX, Kad Kredit, e-Wallet</div>
+  <div class="trust-item"><span class="trust-icon">✅</span> SSM Berdaftar</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- HOSTING SECTION -->
+<section id="hosting">
+  <div class="section-label">Web Hosting</div>
+  <h2 class="section-title">Pakej Hosting <span>Berkualiti Tinggi</span></h2>
+  <p class="section-subtitle">Pilih pakej yang sesuai untuk keperluan perniagaan anda. Semua pakej termasuk SSL percuma, panel cPanel, dan sokongan 24/7.</p>
+
+  <div class="billing-toggle">
+    <span class="toggle-label">Bulanan</span>
+    <div class="toggle-switch active" id="billingToggle" onclick="toggleBilling()"></div>
+    <span class="toggle-label">Tahunan</span>
+    <span class="save-badge">JIMAT 20%</span>
+  </div>
+
+  <div class="pricing-grid">
+    <!-- ASAS -->
+    <div class="card">
+      <div class="card-tier">Pakej 01</div>
+      <div class="card-name">Asas</div>
+      <div class="card-desc">Sesuai untuk blog peribadi, portfolio & laman statik kecil.</div>
+      <div class="price-row">
+        <span class="currency">RM</span>
+        <span class="price" id="price-asas">8</span>
+        <span class="price-period">/bulan</span>
+      </div>
+      <div class="price-annual" id="annual-asas">Bil tahunan: RM 96/tahun</div>
+      <ul class="feature-list">
+        <li>5 GB SSD Storage</li>
+        <li>Bandwidth 50 GB</li>
+        <li>1 Domain Hosting</li>
+        <li>5 Akaun E-mel</li>
+        <li>SSL Percuma (Let's Encrypt)</li>
+        <li>cPanel Akses Penuh</li>
+        <li>1-Klik WordPress Install</li>
+        <li class="no">Staging Environment</li>
+        <li class="no">Priority Support</li>
+      </ul>
+      <a href="#hubungi" class="card-btn card-btn-outline">Pilih Pakej Asas</a>
+    </div>
+
+    <!-- STANDARD -->
+    <div class="card popular">
+      <div class="popular-badge">PALING POPULAR</div>
+      <div class="card-tier">Pakej 02</div>
+      <div class="card-name">Standard</div>
+      <div class="card-desc">Pilihan terbaik untuk perniagaan kecil-sederhana & e-dagang.</div>
+      <div class="price-row">
+        <span class="currency">RM</span>
+        <span class="price" id="price-std">18</span>
+        <span class="price-period">/bulan</span>
+      </div>
+      <div class="price-annual" id="annual-std">Bil tahunan: RM 216/tahun</div>
+      <ul class="feature-list">
+        <li>30 GB SSD Storage</li>
+        <li>Bandwidth Tanpa Had</li>
+        <li>Sehingga 5 Domain</li>
+        <li>50 Akaun E-mel</li>
+        <li>SSL Percuma (Let's Encrypt)</li>
+        <li>cPanel Akses Penuh</li>
+        <li>1-Klik WordPress Install</li>
+        <li>Staging Environment</li>
+        <li class="no">Priority Support</li>
+      </ul>
+      <a href="#hubungi" class="card-btn card-btn-primary">Pilih Pakej Standard</a>
+    </div>
+
+    <!-- PREMIUM -->
+    <div class="card">
+      <div class="card-tier">Pakej 03</div>
+      <div class="card-name">Premium</div>
+      <div class="card-desc">Penyelesaian enterprise untuk trafik tinggi & keperluan kritikal.</div>
+      <div class="price-row">
+        <span class="currency">RM</span>
+        <span class="price" id="price-prem">38</span>
+        <span class="price-period">/bulan</span>
+      </div>
+      <div class="price-annual" id="annual-prem">Bil tahunan: RM 456/tahun</div>
+      <ul class="feature-list">
+        <li>100 GB NVMe SSD Storage</li>
+        <li>Bandwidth Tanpa Had</li>
+        <li>Domain Hosting Tanpa Had</li>
+        <li>Akaun E-mel Tanpa Had</li>
+        <li>SSL Wildcard Percuma</li>
+        <li>cPanel Akses Penuh</li>
+        <li>1-Klik Auto-Installer</li>
+        <li>Staging Environment</li>
+        <li>Priority 24/7 Support</li>
+      </ul>
+      <a href="#hubungi" class="card-btn card-btn-outline">Pilih Pakej Premium</a>
+    </div>
+  </div>
+
+  <!-- COMPARISON TABLE -->
+  <div style="margin-top: 60px;">
+    <h3 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:24px;color:var(--text-secondary);">Perbandingan Penuh Pakej Hosting</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Ciri-ciri</th>
+            <th class="compare-head-cell">Asas</th>
+            <th class="compare-head-cell" style="color:var(--electric)">Standard ⭐</th>
+            <th class="compare-head-cell">Premium</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Harga Bulanan</td>
+            <td><span class="compare-val">RM 8</span></td>
+            <td><span class="compare-val" style="color:var(--electric)">RM 18</span></td>
+            <td><span class="compare-val">RM 38</span></td>
+          </tr>
+          <tr>
+            <td>Harga Tahunan</td>
+            <td><span class="compare-val">RM 96</span></td>
+            <td><span class="compare-val" style="color:var(--electric)">RM 180 <span class="tag-promo">JIMAT RM 36</span></span></td>
+            <td><span class="compare-val">RM 380 <span class="tag-promo">JIMAT RM 76</span></span></td>
+          </tr>
+          <tr><td>Storage SSD</td><td><span class="compare-val">5 GB</span></td><td><span class="compare-val">30 GB</span></td><td><span class="compare-val">100 GB NVMe</span></td></tr>
+          <tr><td>Bandwidth</td><td><span class="compare-val">50 GB</span></td><td><span class="compare-val">Tanpa Had</span></td><td><span class="compare-val">Tanpa Had</span></td></tr>
+          <tr><td>Bilangan Domain</td><td><span class="compare-val">1</span></td><td><span class="compare-val">5</span></td><td><span class="compare-val">Tanpa Had</span></td></tr>
+          <tr><td>Akaun E-mel</td><td><span class="compare-val">5</span></td><td><span class="compare-val">50</span></td><td><span class="compare-val">Tanpa Had</span></td></tr>
+          <tr><td>SSL Percuma</td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓ Wildcard</span></td></tr>
+          <tr><td>Backup Harian</td><td><span class="compare-cross">✗</span></td><td><span class="compare-check">✓ Mingguan</span></td><td><span class="compare-check">✓ Harian</span></td></tr>
+          <tr><td>Staging Environment</td><td><span class="compare-cross">✗</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td></tr>
+          <tr><td>WordPress Staging</td><td><span class="compare-cross">✗</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td></tr>
+          <tr><td>Sokongan Teknikal</td><td><span class="compare-val">E-mel & Tiket</span></td><td><span class="compare-val">E-mel, Tiket & Live Chat</span></td><td><span class="compare-val">Priority 24/7 + Telefon</span></td></tr>
+          <tr><td>Uptime Dijamin</td><td><span class="compare-val">99.5%</span></td><td><span class="compare-val">99.9%</span></td><td><span class="compare-val">99.99%</span></td></tr>
+          <tr><td>CDN Global</td><td><span class="compare-cross">✗</span></td><td><span class="compare-cross">✗</span></td><td><span class="compare-check">✓ Cloudflare</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DOMAIN SECTION -->
+<section id="domain">
+  <div class="section-label">Pendaftaran Domain</div>
+  <h2 class="section-title">Daftarkan <span>Nama Domain</span> Anda</h2>
+  <p class="section-subtitle">Cari nama domain yang sempurna untuk perniagaan anda. Harga terbaik dengan pindahan percuma dan pengurusan DNS mudah.</p>
+
+  <div class="domain-search">
+    <input type="text" class="domain-input" placeholder="cth: namamycompany">
+    <button class="domain-search-btn">🔍 Cari Domain</button>
+  </div>
+
+  <div class="domain-grid">
+    <div class="domain-card">
+      <div class="domain-ext">.com</div>
+      <div class="domain-price-old">RM 60/thn</div>
+      <div class="domain-price-new">RM 45</div>
+      <div class="domain-unit">/ tahun pertama</div>
+      <div class="domain-popular">PALING POPULAR</div>
+      <div class="domain-renew">Pembaharuan: RM 60/thn</div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-ext">.my</div>
+      <div class="domain-price-old">RM 70/thn</div>
+      <div class="domain-price-new">RM 55</div>
+      <div class="domain-unit">/ tahun pertama</div>
+      <div class="domain-popular" style="background:rgba(0,212,255,0.1);color:var(--electric)">IDENTITI MY</div>
+      <div class="domain-renew">Pembaharuan: RM 70/thn</div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-ext">.net</div>
+      <div class="domain-price-old">RM 58/thn</div>
+      <div class="domain-price-new">RM 42</div>
+      <div class="domain-unit">/ tahun pertama</div>
+      <div style="height:24px"></div>
+      <div class="domain-renew">Pembaharuan: RM 58/thn</div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-ext">.org</div>
+      <div class="domain-price-old">RM 55/thn</div>
+      <div class="domain-price-new">RM 40</div>
+      <div class="domain-unit">/ tahun pertama</div>
+      <div style="height:24px"></div>
+      <div class="domain-renew">Pembaharuan: RM 55/thn</div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-ext">.com.my</div>
+      <div class="domain-price-old">RM 80/thn</div>
+      <div class="domain-price-new">RM 65</div>
+      <div class="domain-unit">/ tahun pertama</div>
+      <div class="domain-popular" style="background:rgba(0,232,122,0.1);color:var(--green)">SYARIKAT MY</div>
+      <div class="domain-renew">Pembaharuan: RM 80/thn</div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-ext">.io</div>
+      <div class="domain-price-old">RM 180/thn</div>
+      <div class="domain-price-new">RM 155</div>
+      <div class="domain-unit">/ tahun pertama</div>
+      <div class="domain-popular" style="background:rgba(168,85,247,0.1);color:var(--purple)">TECH STARTUP</div>
+      <div class="domain-renew">Pembaharuan: RM 180/thn</div>
+    </div>
+  </div>
+
+  <!-- DOMAIN TABLE -->
+  <div style="margin-top:52px;">
+    <h3 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:24px;color:var(--text-secondary);">Jadual Harga Domain Penuh</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Ekstensi</th>
+            <th>Kategori</th>
+            <th>Harga Pendaftaran</th>
+            <th>Harga Pembaharuan</th>
+            <th>Harga Pindahan</th>
+            <th>Privasi Whois</th>
+            <th>Tempoh Min.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>.com <span class="tag-popular">POPULAR</span></td><td>Komersial Global</td><td>RM 45/thn</td><td>RM 60/thn</td><td>RM 50/thn</td><td>Percuma</td><td>1 tahun</td></tr>
+          <tr><td>.net</td><td>Rangkaian</td><td>RM 42/thn</td><td>RM 58/thn</td><td>RM 48/thn</td><td>Percuma</td><td>1 tahun</td></tr>
+          <tr><td>.org</td><td>Organisasi</td><td>RM 40/thn</td><td>RM 55/thn</td><td>RM 45/thn</td><td>Percuma</td><td>1 tahun</td></tr>
+          <tr><td>.my <span class="tag-popular">MY</span></td><td>Malaysia</td><td>RM 55/thn</td><td>RM 70/thn</td><td>RM 60/thn</td><td>Percuma</td><td>1 tahun</td></tr>
+          <tr><td>.com.my</td><td>Syarikat MY</td><td>RM 65/thn</td><td>RM 80/thn</td><td>RM 70/thn</td><td>Percuma</td><td>2 tahun</td></tr>
+          <tr><td>.edu.my</td><td>Pendidikan MY</td><td>RM 45/thn</td><td>RM 55/thn</td><td>RM 50/thn</td><td>Percuma</td><td>2 tahun</td></tr>
+          <tr><td>.gov.my</td><td>Kerajaan MY</td><td>RM 45/thn</td><td>RM 55/thn</td><td>—</td><td>Percuma</td><td>2 tahun</td></tr>
+          <tr><td>.io</td><td>Tech / Startup</td><td>RM 155/thn</td><td>RM 180/thn</td><td>RM 170/thn</td><td>Percuma</td><td>1 tahun</td></tr>
+          <tr><td>.store</td><td>E-Dagang</td><td>RM 35/thn</td><td>RM 120/thn</td><td>RM 90/thn</td><td>Percuma</td><td>1 tahun</td></tr>
+          <tr><td>.tech</td><td>Teknologi</td><td>RM 29/thn</td><td>RM 110/thn</td><td>RM 80/thn</td><td>Percuma</td><td>1 tahun</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WEB DESIGN SECTION -->
+<section id="webdesign">
+  <div class="section-label">Reka Bentuk Web</div>
+  <h2 class="section-title">Pakej <span>Web Design</span> Profesional</h2>
+  <p class="section-subtitle">Laman web yang menarik, responsif, dan dioptimumkan SEO — dibina oleh pasukan pakar kami untuk meningkatkan perniagaan anda.</p>
+
+  <div class="design-grid">
+    <!-- BASIC -->
+    <div class="design-card">
+      <div class="design-icon">🖼️</div>
+      <div class="design-type">Pakej Asas</div>
+      <div class="design-name">Profil Syarikat</div>
+      <div class="design-desc">Laman web statik profesional untuk memperkenalkan perniagaan anda secara atas talian.</div>
+      <div class="design-price-row">
+        <span class="design-from">Dari</span>
+        <span class="design-price" style="color:var(--electric)">RM 1,500</span>
+        <span class="design-once">sekali bayar</span>
+      </div>
+      <div class="feature-tags">
+        <span class="feature-tag">5 Halaman</span>
+        <span class="feature-tag">Responsif Mobile</span>
+        <span class="feature-tag">On-Page SEO</span>
+        <span class="feature-tag">Google Maps</span>
+        <span class="feature-tag">Borang Hubungi</span>
+        <span class="feature-tag">WhatsApp Button</span>
+      </div>
+      <ul class="feature-list">
+        <li>Reka bentuk unik mengikut branding</li>
+        <li>Dioptimum untuk kelajuan Google</li>
+        <li>Penyepaduan media sosial</li>
+        <li>Penghantaran dalam 7-10 hari bekerja</li>
+        <li>Latihan penggunaan asas</li>
+        <li>Sokongan 30 hari selepas serahan</li>
+        <li class="no">Sistem Pengurusan Kandungan (CMS)</li>
+        <li class="no">Blog / Artikel Berita</li>
+      </ul>
+      <div class="delivery-badge">⏱ Siap dalam 7–10 hari bekerja</div>
+      <a href="#hubungi" class="card-btn card-btn-outline" style="margin-top:16px">Hubungi Untuk Quote</a>
+    </div>
+
+    <!-- STANDARD -->
+    <div class="design-card" style="border-color:rgba(0,212,255,0.25)">
+      <div class="popular-badge" style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,var(--electric),#009fd4);color:var(--navy);font-size:11px;font-weight:700;padding:4px 16px;border-radius:20px;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap">DISYORKAN</div>
+      <div class="design-icon">⚙️</div>
+      <div class="design-type">Pakej Standard</div>
+      <div class="design-name">Laman CMS</div>
+      <div class="design-desc">Laman web dinamik dengan sistem pengurusan kandungan — kemas kini sendiri tanpa bantuan teknikal.</div>
+      <div class="design-price-row">
+        <span class="design-from">Dari</span>
+        <span class="design-price" style="color:var(--electric)">RM 3,500</span>
+        <span class="design-once">sekali bayar</span>
+      </div>
+      <div class="feature-tags">
+        <span class="feature-tag">10–15 Halaman</span>
+        <span class="feature-tag">CMS WordPress</span>
+        <span class="feature-tag">Blog & Berita</span>
+        <span class="feature-tag">Portfolio</span>
+        <span class="feature-tag">Borang Lanjutan</span>
+        <span class="feature-tag">Multi-Bahasa</span>
+        <span class="feature-tag">Analytics</span>
+      </div>
+      <ul class="feature-list">
+        <li>Reka bentuk unik premium</li>
+        <li>WordPress CMS penuh</li>
+        <li>Sistem blog / artikel berita</li>
+        <li>On-Page SEO lanjutan</li>
+        <li>Google Analytics & Search Console</li>
+        <li>Penghantaran dalam 14-21 hari bekerja</li>
+        <li>Latihan penggunaan CMS (2 jam)</li>
+        <li>Sokongan 60 hari selepas serahan</li>
+      </ul>
+      <div class="delivery-badge">⏱ Siap dalam 14–21 hari bekerja</div>
+      <a href="#hubungi" class="card-btn card-btn-primary" style="margin-top:16px">Hubungi Untuk Quote</a>
+    </div>
+
+    <!-- PREMIUM -->
+    <div class="design-card">
+      <div class="design-icon">🛒</div>
+      <div class="design-type">Pakej Premium</div>
+      <div class="design-name">E-Commerce</div>
+      <div class="design-desc">Kedai atas talian penuh dengan sistem pembayaran FPX, kad kredit, dan e-wallet tempatan.</div>
+      <div class="design-price-row">
+        <span class="design-from">Dari</span>
+        <span class="design-price" style="color:var(--gold)">RM 6,500</span>
+        <span class="design-once">sekali bayar</span>
+      </div>
+      <div class="feature-tags">
+        <span class="feature-tag">Produk Tanpa Had</span>
+        <span class="feature-tag">WooCommerce</span>
+        <span class="feature-tag">FPX & E-Wallet</span>
+        <span class="feature-tag">Pengurusan Stok</span>
+        <span class="feature-tag">Laporan Jualan</span>
+        <span class="feature-tag">Kupon & Diskaun</span>
+        <span class="feature-tag">Akaun Pelanggan</span>
+      </div>
+      <ul class="feature-list">
+        <li>Reka bentuk e-dagang premium</li>
+        <li>WooCommerce + plugin lanjutan</li>
+        <li>Integrasi FPX, Maybank2U, GrabPay, Touch 'n Go</li>
+        <li>Sistem pengurusan stok & pesanan</li>
+        <li>Dashboard laporan jualan</li>
+        <li>Integrasi Shopee / Lazada (opsyen)</li>
+        <li>Penghantaran dalam 30-45 hari bekerja</li>
+        <li>Latihan 4 jam + manual pengguna</li>
+        <li>Sokongan 90 hari selepas serahan</li>
+      </ul>
+      <div class="delivery-badge">⏱ Siap dalam 30–45 hari bekerja</div>
+      <a href="#hubungi" class="card-btn card-btn-outline" style="margin-top:16px">Hubungi Untuk Quote</a>
+    </div>
+  </div>
+
+  <!-- WEB DESIGN COMPARISON -->
+  <div style="margin-top:56px;">
+    <h3 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:24px;color:var(--text-secondary);">Perbandingan Pakej Web Design</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Ciri-ciri</th>
+            <th class="compare-head-cell">Profil (RM 1,500+)</th>
+            <th class="compare-head-cell" style="color:var(--electric)">CMS (RM 3,500+)</th>
+            <th class="compare-head-cell">E-Commerce (RM 6,500+)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Bilangan Halaman</td><td><span class="compare-val">5 halaman</span></td><td><span class="compare-val">10–15 halaman</span></td><td><span class="compare-val">Tanpa had</span></td></tr>
+          <tr><td>Reka Bentuk Responsif</td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td></tr>
+          <tr><td>CMS / Kemaskini Sendiri</td><td><span class="compare-cross">✗</span></td><td><span class="compare-check">✓ WordPress</span></td><td><span class="compare-check">✓ WordPress+WC</span></td></tr>
+          <tr><td>Blog / Berita</td><td><span class="compare-cross">✗</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td></tr>
+          <tr><td>Sistem Pembayaran</td><td><span class="compare-cross">✗</span></td><td><span class="compare-cross">✗</span></td><td><span class="compare-check">✓ FPX, e-Wallet</span></td></tr>
+          <tr><td>Pengurusan Produk / Stok</td><td><span class="compare-cross">✗</span></td><td><span class="compare-cross">✗</span></td><td><span class="compare-check">✓ WooCommerce</span></td></tr>
+          <tr><td>SEO Asas</td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td></tr>
+          <tr><td>SEO Lanjutan + Yoast</td><td><span class="compare-cross">✗</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td></tr>
+          <tr><td>Google Analytics</td><td><span class="compare-cross">✗</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td></tr>
+          <tr><td>Sokongan Selepas Serahan</td><td><span class="compare-val">30 hari</span></td><td><span class="compare-val">60 hari</span></td><td><span class="compare-val">90 hari</span></td></tr>
+          <tr><td>Masa Siap (Anggaran)</td><td><span class="compare-val">7–10 hari</span></td><td><span class="compare-val">14–21 hari</span></td><td><span class="compare-val">30–45 hari</span></td></tr>
+          <tr><td>Latihan Pengguna</td><td><span class="compare-val">Asas</span></td><td><span class="compare-val">2 jam</span></td><td><span class="compare-val">4 jam + manual</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SERVICE CHARGES SECTION -->
+<section id="servicecharge">
+  <div class="section-label">Caj Tambahan</div>
+  <h2 class="section-title">Servis <span>Pelengkap</span></h2>
+  <p class="section-subtitle">Tambahkan lapisan keselamatan, prestasi, dan sokongan untuk laman web anda dengan add-on fleksibel kami.</p>
+
+  <div class="charge-grid">
+    <div class="charge-card">
+      <span class="charge-icon">🔒</span>
+      <div class="charge-name">SSL Premium (Comodo)</div>
+      <div class="charge-desc">Sijil SSL berbayar dengan verifikasi organisasi (OV) dan jaminan perlindungan sehingga USD 250,000.</div>
+      <div><span class="charge-price">RM 180</span><span class="charge-period">/ tahun</span></div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:4px">Termasuk seal keselamatan dinamik</div>
+    </div>
+    <div class="charge-card">
+      <span class="charge-icon">🔐</span>
+      <div class="charge-name">SSL Wildcard</div>
+      <div class="charge-desc">Lindungi domain utama dan semua subdomain tanpa had dengan satu sijil SSL Wildcard.</div>
+      <div><span class="charge-price">RM 380</span><span class="charge-period">/ tahun</span></div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:4px">Sesuai untuk *.domain.com</div>
+    </div>
+    <div class="charge-card">
+      <span class="charge-icon">💾</span>
+      <div class="charge-name">Backup Harian Automatik</div>
+      <div class="charge-desc">Backup penuh setiap 24 jam dengan penyimpanan 30 hari dan pemulihan satu klik.</div>
+      <div><span class="charge-price">RM 25</span><span class="charge-period">/ bulan</span></div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:4px">Simpan sehingga 30 salinan backup</div>
+    </div>
+    <div class="charge-card">
+      <span class="charge-icon">📧</span>
+      <div class="charge-name">Tambah Akaun E-mel</div>
+      <div class="charge-desc">Setiap tambahan 10 akaun e-mel profesional berkuantiti dengan kapasiti 5 GB setiap satu.</div>
+      <div><span class="charge-price">RM 15</span><span class="charge-period">/ bulan</span></div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:4px">+10 akaun e-mel, 5 GB/akaun</div>
+    </div>
+    <div class="charge-card">
+      <span class="charge-icon">🛡️</span>
+      <div class="charge-name">Keselamatan Web (WAF)</div>
+      <div class="charge-desc">Firewall aplikasi web, perlindungan DDoS, dan pengimbas malware harian untuk laman anda.</div>
+      <div><span class="charge-price">RM 45</span><span class="charge-period">/ bulan</span></div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:4px">Cloudflare WAF + Malware Scanner</div>
+    </div>
+    <div class="charge-card">
+      <span class="charge-icon">🎧</span>
+      <div class="charge-name">Priority Technical Support</div>
+      <div class="charge-desc">Sokongan teknikal keutamaan dengan masa respons kurang 2 jam, termasuk sokongan telefon & WhatsApp.</div>
+      <div><span class="charge-price">RM 60</span><span class="charge-period">/ bulan</span></div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:4px">Respons &lt; 2 jam, 24/7</div>
+    </div>
+    <div class="charge-card">
+      <span class="charge-icon">⚡</span>
+      <div class="charge-name">Peningkatan CDN (Global)</div>
+      <div class="charge-desc">Percepat laman web anda di seluruh dunia dengan CDN 200+ nod global melalui Cloudflare Enterprise.</div>
+      <div><span class="charge-price">RM 35</span><span class="charge-period">/ bulan</span></div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:4px">Cloudflare 200+ PoP global</div>
+    </div>
+    <div class="charge-card">
+      <span class="charge-icon">🔧</span>
+      <div class="charge-name">Penyelenggaraan Bulanan</div>
+      <div class="charge-desc">Kemaskini WordPress, tema, plugin, dan pengoptimuman prestasi setiap bulan oleh pasukan teknikal kami.</div>
+      <div><span class="charge-price">RM 120</span><span class="charge-period">/ bulan</span></div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:4px">Kemaskini + pengoptimuman bulanan</div>
+    </div>
+  </div>
+
+  <!-- SERVICE TABLE -->
+  <div style="margin-top: 52px;">
+    <h3 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:24px;color:var(--text-secondary);">Jadual Lengkap Caj Tambahan</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Servis Tambahan</th>
+            <th>Penerangan</th>
+            <th>Harga Bulanan</th>
+            <th>Harga Tahunan</th>
+            <th>Jimat (Tahunan)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>SSL Let's Encrypt</td><td>SSL asas percuma</td><td>—</td><td>PERCUMA</td><td>—</td></tr>
+          <tr><td>SSL Comodo OV</td><td>Verifikasi organisasi</td><td>RM 15</td><td>RM 180</td><td>—</td></tr>
+          <tr><td>SSL Wildcard</td><td>Domain + subdomain tanpa had</td><td>RM 32</td><td>RM 380</td><td>RM 4</td></tr>
+          <tr><td>Backup Mingguan</td><td>4 salinan sebulan</td><td>RM 10</td><td>RM 100</td><td>RM 20</td></tr>
+          <tr><td>Backup Harian</td><td>30 salinan sebulan</td><td>RM 25</td><td>RM 250</td><td>RM 50</td></tr>
+          <tr><td>+10 Akaun E-mel</td><td>5 GB per akaun</td><td>RM 15</td><td>RM 150</td><td>RM 30</td></tr>
+          <tr><td>WAF + Malware Scan</td><td>Keselamatan lanjutan</td><td>RM 45</td><td>RM 450</td><td>RM 90</td></tr>
+          <tr><td>Priority Support</td><td>Respons &lt;2 jam, 24/7</td><td>RM 60</td><td>RM 600</td><td>RM 120</td></tr>
+          <tr><td>CDN Global (Cloudflare)</td><td>200+ nod global</td><td>RM 35</td><td>RM 350</td><td>RM 70</td></tr>
+          <tr><td>Penyelenggaraan Bulanan</td><td>Kemaskini + optimum</td><td>RM 120</td><td>RM 1,200</td><td>RM 240</td></tr>
+          <tr><td>Dedicated IP</td><td>IP eksklusif untuk hosting</td><td>RM 18</td><td>RM 180</td><td>RM 36</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TESTIMONIALS -->
+<section id="testimoni">
+  <div class="section-label">Testimoni</div>
+  <h2 class="section-title">Kata <span>Pelanggan Kami</span></h2>
+  <p class="section-subtitle">Ribuan perniagaan Malaysia telah mempercayai NexaHost untuk kejayaan digital mereka.</p>
+
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Laman web syarikat kami siap dalam masa 12 hari sahaja dan sangat cantik hasilnya. Pasukan NexaHost memahami keperluan kami dengan baik. Trafik organik meningkat 3x dalam masa 2 bulan selepas launch!"</div>
+      <div class="testi-profile">
+        <div class="testi-avatar" style="background:rgba(0,212,255,0.15);color:var(--electric)">AH</div>
+        <div>
+          <div class="testi-name">Ahmad Hafizuddin</div>
+          <div class="testi-role">Pengurus, Syarikat Hartanah Jaya Sdn Bhd · Kuala Lumpur</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Servis hosting sangat laju, uptime memang 99.9% betul. Kami pernah ada masalah teknikal jam 2 pagi dan sokongan mereka respons dalam masa kurang 30 minit! Sangat puas hati dengan perkhidmatan premium support."</div>
+      <div class="testi-profile">
+        <div class="testi-avatar" style="background:rgba(168,85,247,0.15);color:var(--purple)">NR</div>
+        <div>
+          <div class="testi-name">Nur Raihan Mokhtar</div>
+          <div class="testi-role">Pengasas, Butik Fesyen Eloknya · Johor Bahru</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Kami memindahkan hosting dari syarikat lain ke NexaHost. Proses migrasi sangat lancar, tiada downtime, dan harga jauh lebih berpatutan. Laman e-commerce kami kini lebih laju 2x berbanding sebelum ini."</div>
+      <div class="testi-profile">
+        <div class="testi-avatar" style="background:rgba(245,166,35,0.15);color:var(--gold)">CW</div>
+        <div>
+          <div class="testi-name">Chong Wei Ming</div>
+          <div class="testi-role">CEO, TechMart Online Sdn Bhd · Pulau Pinang</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Pakej e-commerce sangat berbaloi! Dalam masa 3 minggu sahaja kedai online kami sudah boleh menerima pembayaran FPX dan GrabPay. Sales online meningkat 40% dalam bulan pertama. Terima kasih NexaHost!"</div>
+      <div class="testi-profile">
+        <div class="testi-avatar" style="background:rgba(0,232,122,0.15);color:var(--green)">SR</div>
+        <div>
+          <div class="testi-name">Siti Rokiah Ismail</div>
+          <div class="testi-role">Pemilik, Dapur Mak Teh Food Supply · Shah Alam</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★☆</div>
+      <div class="testi-text">"Panel cPanel sangat mudah digunakan walaupun kami bukan orang IT. Instalasi WordPress hanya satu klik. Domain .MY kami siap berdaftar dalam masa kurang dari sejam. Sangat syorkan untuk SME Malaysia!"</div>
+      <div class="testi-profile">
+        <div class="testi-avatar" style="background:rgba(0,212,255,0.1);color:var(--electric)">RM</div>
+        <div>
+          <div class="testi-name">Rizal Mansor</div>
+          <div class="testi-role">Pengurus Operasi, Klinik Kesihatan Prima · Ipoh</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Setelah mendaftar pakej Web Design CMS, kami dapat kemaskini kandungan laman web kami sendiri. Latihan yang diberikan sangat jelas dan manual pengguna sangat terperinci. Paling best — domain .MY percuma!"</div>
+      <div class="testi-profile">
+        <div class="testi-avatar" style="background:rgba(245,166,35,0.12);color:var(--gold)">FH</div>
+        <div>
+          <div class="testi-name">Faridah Hashim</div>
+          <div class="testi-role">Pengarah, Akademi Tuisyen Cemerlang · Kota Bharu</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MONETIZATION SECTION -->
+<section id="monetize">
+  <div class="section-label">Strategi Perniagaan</div>
+  <h2 class="section-title">Cadangan <span>Pelan Monetisasi</span></h2>
+  <p class="section-subtitle">Pelbagai saluran pendapatan untuk memaksimumkan keuntungan dan pertumbuhan platform NexaHost.</p>
+
+  <div class="mono-grid">
+    <div class="mono-card">
+      <div class="mono-num">01</div>
+      <div class="mono-title">Langganan Bulanan / Tahunan (Recurring Revenue)</div>
+      <div class="mono-desc">Model SaaS hosting memberikan pendapatan berterusan dan boleh diramal. Pakej tahunan dengan diskaun 20% mendorong komitmen jangka panjang pelanggan. Target MRR: RM 50,000+/bulan dengan 2,500 pelanggan aktif.</div>
+    </div>
+    <div class="mono-card">
+      <div class="mono-num">02</div>
+      <div class="mono-title">Bundle Servis (Upsell & Cross-sell)</div>
+      <div class="mono-desc">Pakej bunting "Hosting + Domain + SSL + Email" pada harga promosi. Teknik cross-sell semasa checkout untuk tambah Backup Harian atau Priority Support. Nilai purata per pelanggan meningkat 35–60%.</div>
+    </div>
+    <div class="mono-card">
+      <div class="mono-num">03</div>
+      <div class="mono-title">Program Reseller Hosting</div>
+      <div class="mono-desc">Tawaran pakej reseller untuk agensi web dan freelancer yang menjual semula hosting kepada klien mereka. Komisen 15–25% setiap jualan. Potensi 500+ reseller aktif dalam 12 bulan pertama.</div>
+    </div>
+    <div class="mono-card">
+      <div class="mono-num">04</div>
+      <div class="mono-title">Web Design Project (One-Time Revenue)</div>
+      <div class="mono-desc">Projek web design satu bayaran (RM 1,500–RM 6,500+) dengan margin keuntungan 40–60%. Pelanggan web design secara automatik menjadi pelanggan hosting jangka panjang — Customer Lifetime Value (CLV) meningkat.</div>
+    </div>
+    <div class="mono-card">
+      <div class="mono-num">05</div>
+      <div class="mono-title">Marketplace Add-on & Plugin Premium</div>
+      <div class="mono-desc">Jual plugin, tema, dan add-on WordPress premium di dalam platform. Komisyen 20–30% daripada jualan pihak ketiga. Pasaran tema premium Malaysia sangat kurang pesaing — peluang besar untuk jadi pemain utama.</div>
+    </div>
+    <div class="mono-card">
+      <div class="mono-num">06</div>
+      <div class="mono-title">Pengiklanan Premium (Sponsored Placement)</div>
+      <div class="mono-desc">Halaman domain search & pakej comparison boleh menawarkan "Featured Listing" kepada vendor teknologi seperti pembekal SSL, plugin e-commerce, dan tools digital marketing. Anggaran RM 3,000–RM 10,000/bulan.</div>
+    </div>
+  </div>
+
+  <div class="cta-band">
+    <h2>Sedia Untuk Bermula? 🚀</h2>
+    <p>Daftar hari ini dan dapatkan domain .MY PERCUMA untuk 1 tahun pertama bersama mana-mana pakej hosting tahunan. Tiada komitmen jangka panjang untuk pakej bulanan.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="#hosting" class="btn-primary">Tempah Pakej Sekarang</a>
+      <a href="#hubungi" class="btn-outline">Bincang Dengan Kami</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOOTER -->
+<footer id="hubungi">
+  <div class="footer-grid">
+    <!-- Brand -->
+    <div class="footer-brand">
+      <span class="logo">Nexa<span>Host</span><sub>MY</sub></span>
+      <p>Penyelesaian hosting, domain, dan reka bentuk web terpercaya untuk perniagaan Malaysia. Pelayan berkelajuan tinggi di data center Malaysia & Singapore.</p>
+      <div class="footer-contact">
+        <a href="tel:+60312345678">📞 +603-1234 5678</a>
+        <a href="https://wa.me/60312345678">💬 WhatsApp: +6011-2345 6789</a>
+        <a href="mailto:support@nexahost.my">✉️ support@nexahost.my</a>
+        <a href="#">📍 Suite 12-5, Menara Imbi, Jalan Imbi, 55100 KL</a>
+      </div>
+      <div class="social-row">
+        <div class="social-btn" title="Facebook">f</div>
+        <div class="social-btn" title="Instagram">📸</div>
+        <div class="social-btn" title="Twitter/X">𝕏</div>
+        <div class="social-btn" title="LinkedIn">in</div>
+        <div class="social-btn" title="YouTube">▶</div>
+      </div>
+    </div>
+
+    <!-- Hosting -->
+    <div class="footer-col">
+      <h4>Hosting</h4>
+      <ul>
+        <li><a href="#hosting">Hosting Asas</a></li>
+        <li><a href="#hosting">Hosting Standard</a></li>
+        <li><a href="#hosting">Hosting Premium</a></li>
+        <li><a href="#">VPS Hosting</a></li>
+        <li><a href="#">Dedicated Server</a></li>
+        <li><a href="#">Reseller Hosting</a></li>
+        <li><a href="#">WordPress Hosting</a></li>
+      </ul>
+    </div>
+
+    <!-- Domain & Web -->
+    <div class="footer-col">
+      <h4>Domain & Web</h4>
+      <ul>
+        <li><a href="#domain">Daftar Domain</a></li>
+        <li><a href="#domain">Pindah Domain</a></li>
+        <li><a href="#domain">Perbaharui Domain</a></li>
+        <li><a href="#webdesign">Web Design Asas</a></li>
+        <li><a href="#webdesign">Web Design CMS</a></li>
+        <li><a href="#webdesign">Kedai E-Commerce</a></li>
+        <li><a href="#">Portfolio Web</a></li>
+      </ul>
+    </div>
+
+    <!-- Syarikat -->
+    <div class="footer-col">
+      <h4>Syarikat</h4>
+      <ul>
+        <li><a href="#">Tentang Kami</a></li>
+        <li><a href="#">Blog Teknologi</a></li>
+        <li><a href="#">Pusat Bantuan (FAQ)</a></li>
+        <li><a href="#">Status Pelayan</a></li>
+        <li><a href="#">Dasar Privasi</a></li>
+        <li><a href="#">Terma Penggunaan</a></li>
+        <li><a href="#">Program Afiliasi</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 NexaHost Sdn Bhd (SSM: 1234567-X). Hak cipta terpelihara. Dibuat dengan ♥ di Malaysia.</p>
+    <div class="footer-cert">
+      <span class="cert-badge">SSM Berdaftar</span>
+      <span class="cert-badge">MCMC Lesen</span>
+      <span class="cert-badge">ISO 27001</span>
+      <span class="cert-badge">PCI-DSS</span>
+    </div>
+  </div>
+</footer>
+
+<!-- SCROLL TOP -->
+<button id="scrolltop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+  let isAnnual = true;
+  const prices = {
+    asas: { monthly: 10, annual: 8 },
+    std:  { monthly: 22, annual: 18 },
+    prem: { monthly: 46, annual: 38 }
+  };
+
+  function toggleBilling() {
+    isAnnual = !isAnnual;
+    document.getElementById('billingToggle').classList.toggle('active', isAnnual);
+    update('asas'); update('std'); update('prem');
+  }
+
+  function update(key) {
+    const p = prices[key];
+    const price = isAnnual ? p.annual : p.monthly;
+    document.getElementById('price-' + key).textContent = price;
+    if (isAnnual) {
+      document.getElementById('annual-' + key).textContent = 'Bil tahunan: RM ' + (price * 12) + '/tahun';
+    } else {
+      document.getElementById('annual-' + key).textContent = 'Tukar ke tahunan — jimat RM ' + ((p.monthly - p.annual) * 12) + '/tahun';
+    }
+  }
+
+  // Init
+  update('asas'); update('std'); update('prem');
+</script>
+</body>
+</html>
